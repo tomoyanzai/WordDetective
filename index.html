@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Detective</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>Word Detective</h1>
+        <div id="theme-display"></div>
+        <div id="story-intro"></div>
+        <div id="word-ladder"></div>
+        <div id="guess-display" class="guess-display">
+            <input type="text" id="word-input" placeholder="type a word" maxlength="10">
+        </div>
+        <div id="keyboard" class="keyboard"></div>
+        <div id="message"></div>
+        <div id="score"></div>
+        <button onclick="getHint()">Get Hint</button>
+        <div id="hint"></div>
+        <button onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+    <script src="quizzes.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
