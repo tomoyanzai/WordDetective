@@ -51,16 +51,12 @@ function initializeGame() {
   updateScore();
 
   wordInput = document.getElementById('word-input');
-  wordInput.addEventListener('input', handleInput);
-  wordInput.addEventListener('keyup', function(event) {
-    if (event.key === 'Enter') {
-      submitGuess();
-    }
-  });
+  wordInput.readOnly = true; // キーボード入力を無効化
   wordInput.maxLength = dailyChallenge[currentDifficulty][currentWordIndex].word.length;
-  wordInput.placeholder = `Enter a ${wordInput.maxLength}-letter word`;
+  wordInput.placeholder = `type a word`;
 
   createKeyboard();
+  updateGuessDisplay();
 }
 
 function displayTheme() {
@@ -116,17 +112,15 @@ function handleKeyPress(key) {
   if (key === "Enter") {
     submitGuess();
   } else if (key === "Del") {
-    wordInput.value = wordInput.value.slice(0, -1);
-    handleInput({ target: wordInput });
-  } else if (wordInput.value.length < wordInput.maxLength) {
-    wordInput.value += key.toLowerCase();
-    handleInput({ target: wordInput });
+    currentGuess = currentGuess.slice(0, -1);
+  } else if (currentGuess.length < wordInput.maxLength) {
+    currentGuess += key.toLowerCase();
   }
-  wordInput.focus();
+  updateGuessDisplay();
 }
 
-function handleInput(event) {
-  currentGuess = event.target.value.toLowerCase();
+function updateGuessDisplay() {
+  wordInput.value = currentGuess.toUpperCase();
 }
 
 function resetHint() {
@@ -166,14 +160,15 @@ function submitGuess() {
       setMessage("Correct! Next word.");
       resetHint();
       wordInput.maxLength = dailyChallenge[currentDifficulty][currentWordIndex].word.length;
-      wordInput.placeholder = `Enter a ${wordInput.maxLength}-letter word`;
+      currentGuess = "";
+      updateGuessDisplay();
     }
   } else {
     setMessage("Incorrect. Try again.");
   }
 
-  wordInput.value = '';
   currentGuess = '';
+  updateGuessDisplay();
   updateScore();
 }
 
