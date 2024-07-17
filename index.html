@@ -1,36 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Word Detective: Improve Your English Vocabulary</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Detective</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div id="game-container">
-        <div class="content-wrapper">
-            <header>
-                <h1 id="game-logo">WORD DETECTIVE</h1>
-                <div class="header-buttons">
-                    <button id="theme-toggle" onclick="toggleTheme()">🌓</button>
-                    <button id="hint-button" onclick="getHint()">Hint</button>
-                </div>
-            </header>
-            <div id="theme-display"></div>
-            <div id="story-intro"></div>
-            <div id="difficulty-display"></div>
-            <div id="hint"></div>
-            <div id="word-ladder"></div>
-            <div id="guess-display">
-                <div class="guess-input"></div>
-                <div class="guess-placeholder"></div>  
-            </div>
-            <div id="message"></div>
-            <div id="keyboard"></div>
-            <div id="score"></div>
+      <header>
+        <h1 id="game-logo">WORD DETECTIVE</h1>
+        <button id="theme-toggle">🌓</button>
+      </header>
+
+      <div id="game-area">
+        <div id="clues-section">
+          <h2>CLUES</h2>
+          <div id="clues-container"></div>
         </div>
+        <div id="mini-history"></div>
+        <div id="current-guess"></div>
+      </div>
+      <div id="progress"></div>
+      <div id="keyboard"></div>
     </div>
+
     <script src="quizzes.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

@@ -1,267 +1,215 @@
 :root {
-    --bg-color: #333;
-    --text-color: #ffffff;
-    --tile-text-color: #ffffff;
-    --key-bg-color: #3a3a3a;
-    --key-text-color: #ffffff;
-    --correct-color: #538d4e;
-    --wrong-position-color: #b59f3b;
-    --incorrect-color: #3a3a3c;
-    --hint-color: #61dafb;
-    --error-color: #ff6b6b;
-    --border-color: #e9e2e2;
-    --guess-display-bg: #272727;
-    --guess-display-border: #4caf50;
-    --placeholder-color: #643b3b;
+  --color-correct: #6aaa64;
+  --color-present: #c9b458;
+  --color-absent: #787c7e;
+  --color-background: #ffffff;
+  --color-text: #1a1a1b;
+  --key-bg: #d3d6da;
+  --key-text: #1a1a1b;
+  --tile-border-empty: #d3d6da;
+  --clue-bg: #f0f0f0;
+  --clue-border: #cccccc;
 }
 
-[data-theme="light"] {
-    --bg-color: #f0f0f0;
-    --text-color: #333333;
-    --tile-text-color: #ffffff;
-    --key-bg-color: #d3d6da;
-    --key-text-color: #1a1a1b;
-    --correct-color: #6aaa64;
-    --wrong-position-color: #c9b458;
-    --incorrect-color: #787c7e;
-    --hint-color: #3498db;
-    --error-color: #d63031;
-    --border-color: #cccccc;
-    --guess-display-bg: #e8e8e8;
-    --guess-display-border: #4caf50;
-    --placeholder-color: #999999;
+[data-theme="dark"] {
+  --color-background: #121213;
+  --color-text: #ffffff;
+  --key-bg: #818384;
+  --key-text: #ffffff;
+  --tile-border-empty: #3a3a3c;
+  --clue-bg: #2f2f2f;
+  --clue-border: #555555;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    touch-action: manipulation;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 #game-container {
-    text-align: center;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    width: calc(100% - 30px);
-    margin: 0 auto;
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.content-wrapper {
-    position: relative;
-    z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  max-height: 800px;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #game-logo {
-    font-size: 20px;
-    margin: 0;
+  font-size: 24px;
+  margin: 0;
 }
 
-.header-buttons {
-    display: flex;
-    gap: 10px;
+#theme-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-#theme-toggle,
-#hint-button {
-    padding: 8px 12px;
-    font-size: 14px;
-    background-color: var(--key-bg-color);
-    color: var(--key-text-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+#game-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  padding: 10px 0;
 }
 
-#theme-toggle:hover,
-#hint-button:hover {
-    opacity: 0.8;
+#clues-section {
+  margin-bottom: 10px;
 }
 
-#hint {
-    margin: 10px 0;
-    font-style: italic;
-    color: var(--hint-color);
-    min-height: 20px;
+#clues-section h2 {
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
-#word-ladder {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 5px;
-    margin-bottom: 15px;
+#clues-container {
+  background-color: var(--clue-bg);
+  border: 1px solid var(--clue-border);
+  border-radius: 5px;
+  padding: 10px;
 }
 
-.word-row {
-    display: flex;
-    justify-content: center;
-    gap: 3px;
+.clue {
+  margin-bottom: 5px;
 }
 
-.letter {
-    width: 35px;
-    height: 35px;
-    border: 1px solid var(--border-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 18px;
-    text-transform: uppercase;
-    color: var(--tile-text-color);
+#mini-history {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.correct {
-    background-color: var(--correct-color);
-    color: var(--tile-text-color);
+.mini-history-row {
+  display: flex;
+  margin-right: 5px;
 }
 
-.wrong-position {
-    background-color: var(--wrong-position-color);
-    color: var(--tile-text-color);
+.mini-history-tile {
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  margin: 0 1px;
 }
 
-.incorrect {
-    background-color: var(--incorrect-color);
-    color: var(--tile-text-color);
+#current-guess {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.current-tile {
+  width: 50px;
+  height: 50px;
+  font-size: 1.8rem;
+  margin: 0 2px;
 }
 
 #keyboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 15px;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 5px;
 }
 
 .keyboard-row {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 3px;
+  display: flex;
+  justify-content: center;
+  gap: 3px;
 }
 
 .key {
-    width: 28px;
-    height: 35px;
-    margin: 1px;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--key-bg-color);
-    color: var(--key-text-color);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: uppercase;
-    outline: none;
-    touch-action: manipulation;
+  font-family: inherit;
+  font-weight: bold;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  height: 50px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--key-bg);
+  color: var(--key-text);
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  user-select: none;
 }
 
-.key-wide {
-    width: 55px;
+.key.wide {
+  flex: 1.5;
 }
 
-#guess-display {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    margin: 20px 0;
-    border: 2px solid var(--border-color);
-    border-radius: 25px;
-    overflow: hidden;
+#message,
+#score-progress {
+  text-align: center;
+  margin-top: 10px;
 }
 
-.guess-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0 20px;
-    font-size: 24px;
-    line-height: 50px;
-    background: transparent;
-    color: var(--text-color);
-    text-align: center;
-    letter-spacing: 2px;
+.tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 2px solid var(--tile-border-empty);
+  background-color: var(--color-background);
 }
 
-.guess-placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: var(--placeholder-color);
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+.tile.correct {
+  background-color: var(--color-correct);
+  border-color: var(--color-correct);
+  color: white;
 }
 
-#guess-display:focus-within .guess-placeholder,
-#guess-display.has-input .guess-placeholder {
-    opacity: 0;
+.tile.present {
+  background-color: var(--color-present);
+  border-color: var(--color-present);
+  color: white;
 }
 
-#message {
-    height: 20px;
-    margin: 10px 0;
-    color: var(--error-color);
-    font-weight: bold;
+.tile.absent {
+  background-color: var(--color-absent);
+  border-color: var(--color-absent);
+  color: white;
 }
 
-#score {
-    margin-top: 15px;
-    font-weight: bold;
-}
+@media (max-height: 600px) {
+  #game-container {
+    justify-content: flex-start;
+  }
 
-.key-disabled {
-    background-color: var(--incorrect-color);
-    color: var(--key-text-color);
-    cursor: not-allowed;
-}
+  #game-area {
+    justify-content: flex-start;
+  }
 
-@media (min-width: 375px) {
-    #game-container {
-        padding: 20px;
-    }
+  #clues-section {
+    margin-bottom: 10px;
+  }
 
-    .letter {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-    }
+  #mini-history {
+    margin-bottom: 10px;
+  }
 
-    .key {
-        width: 30px;
-        height: 40px;
-        font-size: 16px;
-    }
-
-    .key-wide {
-        width: 60px;
-    }
+  #current-guess {
+    margin-bottom: 15px;
+  }
 }

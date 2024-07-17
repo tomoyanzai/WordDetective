@@ -1,282 +1,260 @@
-document.addEventListener("DOMContentLoaded", initializeGame);
-
-let currentWordIndex = 0;
-let score = 0;
-let currentGuess = "";
-let hintUsed = false;
-let currentDifficulty = "beginner";
-let hintIndex = 0;
-let storyIntroDisplayed = false;
-let dailyChallenge;
-
-function getTodayDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-}
-
-function getTodayQuiz() {
-    const todayDate = getTodayDate();
-    return quizzes[todayDate];
-}
+let currentWord = "";
+let guesses = [];
+let currentGuess = [];
+let currentRow = 0;
 
 function initializeGame() {
-    dailyChallenge = getTodayQuiz();
-    
-    if (!storyIntroDisplayed) {
-        displayStoryIntro();
-        storyIntroDisplayed = true;
-    }
-    displayTheme();
-
-    const wordLadderElement = document.getElementById("word-ladder");
-    if (wordLadderElement) {
-        wordLadderElement.innerHTML = "";
-        dailyChallenge[currentDifficulty].forEach((wordObj, index) => {
-            const wordRow = document.createElement("div");
-            wordRow.className = "word-row";
-            wordRow.id = `word-${index}`;
-            for (let i = 0; i < wordObj.word.length; i++) {
-                const letterElement = document.createElement("div");
-                letterElement.className = "letter";
-                wordRow.appendChild(letterElement);
-            }
-            wordLadderElement.appendChild(wordRow);
-        });
-    }
-
-    setupGuessDisplay();
-    createKeyboard();
-    updateScore();
-    resetHint();
+  loadWord();
+  createCurrentGuessDisplay();
+  displayClues();
+  createKeyboard();
+  updateProgress();
+  document
+    .getElementById("theme-toggle")
+    .addEventListener("click", toggleTheme);
 }
 
-function displayTheme() {
-    const themeDisplay = document.getElementById("theme-display");
-    if (themeDisplay) {
-        themeDisplay.textContent = `Today's Theme: ${dailyChallenge.theme}`;
-    }
+function getCurrentDate() {
+  const now = new Date();
+  return now.toISOString().split("T")[0]; // Returns "YYYY-MM-DD"
 }
 
-function displayStoryIntro() {
-    const storyIntroElement = document.getElementById("story-intro");
-    if (storyIntroElement) {
-        storyIntroElement.textContent = dailyChallenge.story_intro;
-        storyIntroElement.style.display = "block";
-    }
+function loadWord() {
+  const currentDate = getCurrentDate();
+  const quiz = quizzes[currentDate];
+  if (quiz) {
+    currentWord = quiz.words[0].word.toUpperCase();
+  } else {
+    console.error("No quiz found for today's date");
+    // Fallback to a default quiz or show an error message
+  }
 }
 
-function setupGuessDisplay() {
-    const guessDisplay = document.getElementById("guess-display");
-    if (guessDisplay) {
-        guessDisplay.innerHTML = `
-            <div class="guess-input"></div>
-            <div class="guess-placeholder"></div>
-        `;
-    }
+function displayClues() {
+  const currentDate = getCurrentDate();
+  const clues = quizzes[currentDate].words[0].clues;
+  const cluesContainer = document.getElementById("clues-container");
+  cluesContainer.innerHTML = "";
+  clues.forEach((clue) => {
+    const clueElement = document.createElement("div");
+    clueElement.className = "clue";
+    clueElement.textContent = clue;
+    cluesContainer.appendChild(clueElement);
+  });
+}
+
+function createCurrentGuessDisplay() {
+  const currentGuessElement = document.getElementById("current-guess");
+  for (let i = 0; i < 5; i++) {
+    const tile = document.createElement("div");
+    tile.className = "current-tile tile";
+    currentGuessElement.appendChild(tile);
+  }
 }
 
 function createKeyboard() {
-    const keyboard = document.getElementById("keyboard");
-    if (!keyboard) return;
+  const keyboard = document.getElementById("keyboard");
+  const layout = [
+    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+    ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DEL"],
+  ];
 
-    keyboard.innerHTML = "";
-    const layout = [
-        ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-        ["Enter", "Z", "X", "C", "V", "B", "N", "M", "Del"],
-    ];
-
-    layout.forEach((row) => {
-        const rowElement = document.createElement("div");
-        rowElement.className = "keyboard-row";
-        row.forEach((key) => {
-            const keyElement = document.createElement("button");
-            keyElement.className = "key";
-            keyElement.textContent = key;
-            if (key === "Enter" || key === "Del") {
-                keyElement.classList.add("key-wide");
-            }
-            keyElement.addEventListener("click", () => handleKeyPress(key));
-            rowElement.appendChild(keyElement);
-        });
-        keyboard.appendChild(rowElement);
+  layout.forEach((row) => {
+    const rowElement = document.createElement("div");
+    rowElement.className = "keyboard-row";
+    row.forEach((key) => {
+      const keyElement = document.createElement("button");
+      keyElement.className = "key";
+      keyElement.textContent = key;
+      keyElement.setAttribute("data-key", key);
+      if (key === "ENTER" || key === "DEL") {
+        keyElement.classList.add("wide");
+      }
+      keyElement.addEventListener("click", () => handleKeyPress({ key }));
+      rowElement.appendChild(keyElement);
     });
+    keyboard.appendChild(rowElement);
+  });
 }
 
-function handleKeyPress(key) {
-    const currentWord = dailyChallenge[currentDifficulty][currentWordIndex].word;
-    
-    if (key === "Enter") {
-        submitGuess();
-    } else if (key === "Del") {
-        currentGuess = currentGuess.slice(0, -1);
-    } else if (currentGuess.length < currentWord.length) {
-        currentGuess += key.toLowerCase();
+function handleKeyPress(e) {
+  if (guesses.length === 5) return;
+
+  const key = e.key.toUpperCase();
+  if (key === "ENTER") {
+    if (currentGuess.length === 5) {
+      submitGuess();
     }
-    updateGuessDisplay();
+  } else if (key === "BACKSPACE" || key === "DEL") {
+    deleteLetter();
+  } else if (/^[A-Z]$/.test(key) && currentGuess.length < 5) {
+    addLetter(key);
+  }
 }
 
-function updateGuessDisplay() {
-    const guessDisplay = document.getElementById("guess-display");
-    const guessInput = guessDisplay.querySelector(".guess-input");
-    
-    if (guessInput) {
-        if (currentGuess.length > 0) {
-            guessInput.textContent = currentGuess.toUpperCase();
-            guessDisplay.classList.add("has-input");
-        } else {
-            guessInput.textContent = "";
-            guessDisplay.classList.remove("has-input");
-        }
-    }
+function addLetter(letter) {
+  if (currentGuess.length < 5) {
+    currentGuess.push(letter);
+    updateCurrentGuessDisplay();
+  }
 }
 
-function resetHint() {
-    const hintElement = document.getElementById("hint");
-    if (hintElement) {
-        hintElement.textContent = "";
-    }
-    hintUsed = false;
-    hintIndex = 0;
+function deleteLetter() {
+  if (currentGuess.length > 0) {
+    currentGuess.pop();
+    updateCurrentGuessDisplay();
+  }
 }
 
 function submitGuess() {
-    const currentWord = dailyChallenge[currentDifficulty][currentWordIndex].word;
-
-    if (currentGuess.length !== currentWord.length) {
-        setMessage(`Please enter a ${currentWord.length}-letter word.`);
-        return;
-    }
-
-    updateWordRow(currentGuess, currentWord);
-    disableUsedKeys(currentGuess, currentWord);
-
-    if (currentGuess === currentWord) {
-        score += hintUsed ? 5 : 10;
-        currentWordIndex++;
-        if (currentWordIndex >= dailyChallenge[currentDifficulty].length) {
-            if (currentDifficulty === "beginner") {
-                currentDifficulty = "intermediate";
-                currentWordIndex = 0;
-                initializeGame();
-                setMessage("Great job! Moving to intermediate level.");
-            } else if (currentDifficulty === "intermediate") {
-                currentDifficulty = "advanced";
-                currentWordIndex = 0;
-                initializeGame();
-                setMessage("Excellent! Moving to advanced level.");
-            } else {
-                setMessage("Congratulations! You've completed all levels! 🎉");
-            }
-        } else {
-            resetKeyColors();
-            setMessage("Correct! Next word.");
-            setupGuessDisplay();
-            resetHint();
-        }
-    } else {
-        setMessage("Incorrect. Try again.");
-    }
-
-    currentGuess = "";
-    updateGuessDisplay();
-    updateScore();
+  const guess = currentGuess.join("");
+  guesses.push(guess);
+  checkGuess(guess);
+  currentGuess = [];
+  currentRow++;
+  updateCurrentGuessDisplay();
+  updateMiniHistory();
+  if (guess === currentWord) {
+    endGame(true);
+  } else if (guesses.length === 5) {
+    endGame(false);
+  }
+  updateProgress();
 }
 
-function updateWordRow(guess, correctWord) {
-    const wordRow = document.getElementById(`word-${currentWordIndex}`);
-    const letters = wordRow.getElementsByClassName("letter");
-
-    for (let i = 0; i < guess.length; i++) {
-        letters[i].textContent = guess[i].toUpperCase();
-        if (guess[i] === correctWord[i]) {
-            letters[i].className = "letter correct";
-        } else if (correctWord.includes(guess[i])) {
-            letters[i].className = "letter wrong-position";
-        } else {
-            letters[i].className = "letter incorrect";
-        }
-    }
+function updateCurrentGuessDisplay() {
+  const currentTiles = document.querySelectorAll(".current-tile");
+  for (let i = 0; i < 5; i++) {
+    currentTiles[i].textContent = currentGuess[i] || "";
+    currentTiles[i].className = `current-tile tile ${
+      currentGuess[i] ? "filled" : ""
+    }`;
+  }
 }
 
-function disableUsedKeys(guess, correctWord) {
-    const keyboardKeys = document.getElementsByClassName("key");
-    for (let i = 0; i < guess.length; i++) {
-        const keyElement = Array.from(keyboardKeys).find(
-            (key) => key.textContent.toLowerCase() === guess[i]
-        );
-        if (keyElement && !correctWord.includes(guess[i])) {
-            keyElement.classList.add("key-disabled");
-            keyElement.disabled = true;
-        }
-    }
+function getTileClass(letter, index) {
+  if (letter === currentWord[index]) {
+    return "correct";
+  } else if (currentWord.includes(letter)) {
+    return "present";
+  } else {
+    return "absent";
+  }
 }
 
-function resetKeyColors() {
-    const keyboardKeys = document.getElementsByClassName("key");
-    Array.from(keyboardKeys).forEach((key) => {
-        key.classList.remove("key-disabled");
-        key.disabled = false;
-    });
+function checkGuess(guess) {
+  const letterCount = {};
+  for (let letter of currentWord) {
+    letterCount[letter] = (letterCount[letter] || 0) + 1;
+  }
+
+  const result = new Array(5).fill("absent");
+
+  // First pass: mark correct letters
+  for (let i = 0; i < 5; i++) {
+    if (guess[i] === currentWord[i]) {
+      result[i] = "correct";
+      letterCount[guess[i]]--;
+    }
+  }
+
+  // Second pass: mark present letters
+  for (let i = 0; i < 5; i++) {
+    if (
+      result[i] !== "correct" &&
+      currentWord.includes(guess[i]) &&
+      letterCount[guess[i]] > 0
+    ) {
+      result[i] = "present";
+      letterCount[guess[i]]--;
+    }
+  }
+
+  // Update keyboard colors
+  for (let i = 0; i < 5; i++) {
+    updateKeyboardColor(guess[i], result[i]);
+  }
 }
 
-function setMessage(msg) {
-    const messageElement = document.getElementById("message");
-    if (messageElement) {
-        messageElement.textContent = msg;
+function updateKeyboardColor(letter, status) {
+  const key = document.querySelector(`button[data-key="${letter}"]`);
+  if (key) {
+    if (status === "correct") {
+      key.style.backgroundColor = "var(--color-correct)";
+      key.style.color = "white";
+    } else if (
+      status === "present" &&
+      key.style.backgroundColor !== "var(--color-correct)"
+    ) {
+      key.style.backgroundColor = "var(--color-present)";
+      key.style.color = "white";
+    } else if (status === "absent" && !key.style.backgroundColor) {
+      key.style.backgroundColor = "var(--color-absent)";
+      key.style.color = "white";
     }
+  }
 }
 
-function updateScore() {
-    const scoreElement = document.getElementById("score");
-    if (scoreElement) {
-        scoreElement.textContent = `Score: ${score}`;
+function updateMiniHistory() {
+  const miniHistory = document.getElementById("mini-history");
+  miniHistory.innerHTML = "";
+  const start = Math.max(0, guesses.length - 2);
+  for (let i = start; i < guesses.length; i++) {
+    const row = document.createElement("div");
+    row.className = "mini-history-row";
+    for (let j = 0; j < 5; j++) {
+      const tile = document.createElement("div");
+      tile.className = `mini-history-tile tile ${getTileClass(
+        guesses[i][j],
+        j
+      )}`;
+      tile.textContent = guesses[i][j];
+      row.appendChild(tile);
     }
+    miniHistory.appendChild(row);
+  }
 }
 
-function getHint() {
-    const hintElement = document.getElementById("hint");
-    const currentWordHints = dailyChallenge[currentDifficulty][currentWordIndex].hint;
-    if (hintElement && currentWordHints) {
-        if (hintIndex < currentWordHints.length) {
-            hintElement.textContent = currentWordHints[hintIndex];
-            hintIndex++;
-            hintUsed = true;
-        } else {
-            hintElement.textContent = "No more hints available.";
-        }
-    }
+function endGame(isWin) {
+  let message;
+  if (isWin) {
+    message = "Congratulations! You guessed the word!";
+  } else {
+    message = `Game over. The word was ${currentWord}.`;
+  }
+
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const tomorrowDate = tomorrow.toLocaleString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
+
+  message += `\n\nThank you for playing today's Word Detective!\nA new word will be waiting for you on ${tomorrowDate}.\nCome back tomorrow to challenge your vocabulary skills again!`;
+
+  alert(message);
+
+  document.removeEventListener("keydown", handleKeyPress);
+
+  document.getElementById("game-area").style.opacity = "0.5";
+  document.getElementById("keyboard").style.pointerEvents = "none";
+}
+
+function updateProgress() {
+  document.getElementById("progress").textContent = `Guess ${currentRow + 1}/5`;
 }
 
 function toggleTheme() {
-    const html = document.documentElement;
-    const currentTheme = html.getAttribute("data-theme");
-    const newTheme = currentTheme === "light" ? "dark" : "light";
-    html.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
+  document.documentElement.setAttribute(
+    "data-theme",
+    document.documentElement.getAttribute("data-theme") === "light"
+      ? "dark"
+      : "light"
+  );
 }
 
-function setInitialTheme() {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-        document.documentElement.setAttribute("data-theme", savedTheme);
-    }
-}
-
-setInitialTheme();
-
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === "Backspace" || /^[a-zA-Z]$/.test(e.key)) {
-        e.preventDefault();
-        if (e.key === "Enter") {
-            submitGuess();
-        } else if (e.key === "Backspace") {
-            handleKeyPress("Del");
-        } else {
-            handleKeyPress(e.key.toUpperCase());
-        }
-    }
-});
+document.addEventListener("DOMContentLoaded", initializeGame);
+document.addEventListener("keydown", handleKeyPress);
