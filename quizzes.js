@@ -245,13 +245,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "climb",
-        difficulty: 4,
-        level: "Common Daily Words",
+        word: "coast",
+        difficulty: 5,
+        level: "Intermediate Level",
         clues: [
-          "To move upwards, typically using hands and feet",
-          "Often associated with mountains or ladders",
-          "Can be used metaphorically for advancement",
+          "The land near a shore",
+          "To move without using power",
+          "To act or proceed with little effort",
         ],
       },
     ],
@@ -260,13 +260,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "ghost",
-        difficulty: 4,
-        level: "Common Daily Words",
+        word: "pitch",
+        difficulty: 5,
+        level: "Intermediate Level",
         clues: [
-          "A supposed spirit of a dead person",
-          "Often featured in horror stories",
-          "Can mean to suddenly cut off all communication",
+          "To throw something",
+          "The quality of a sound's highness or lowness",
+          "To promote or advertise",
         ],
       },
     ],
@@ -275,13 +275,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "piano",
-        difficulty: 4,
-        level: "Common Daily Words",
+        word: "train",
+        difficulty: 5,
+        level: "Intermediate Level",
         clues: [
-          "A musical instrument with keys",
-          "Can be upright or grand",
-          "Name comes from Italian for 'soft'",
+          "A series of connected vehicles on a railway",
+          "To teach a skill through practice and instruction",
+          "A part of a gown that trails behind the wearer",
         ],
       },
     ],
@@ -290,13 +290,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "yacht",
+        word: "shade",
         difficulty: 5,
         level: "Intermediate Level",
         clues: [
-          "A medium-sized sailboat or motorboat",
-          "Often associated with luxury and wealth",
-          "Used for racing or pleasure cruising",
+          "Partial darkness or shelter from direct light",
+          "A subtle difference in color",
+          "A ghost or spirit",
         ],
       },
     ],
@@ -305,13 +305,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "knead",
-        difficulty: 5,
-        level: "Intermediate Level",
+        word: "plumb",
+        difficulty: 6,
+        level: "Advanced Words",
         clues: [
-          "To work and press into a mass",
-          "Often done with dough in baking",
-          "Can also refer to massaging muscles",
+          "To measure depth",
+          "Exactly vertical",
+          "To understand or solve completely",
         ],
       },
     ],
@@ -320,13 +320,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "queue",
+        word: "stall",
         difficulty: 5,
         level: "Intermediate Level",
         clues: [
-          "A line of people waiting for something",
-          "Can also be used as a verb",
-          "In computing, it's a data structure",
+          "A compartment for an animal in a stable",
+          "To stop making progress",
+          "A small stand used to sell goods",
         ],
       },
     ],
@@ -335,13 +335,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "rhythm",
-        difficulty: 6,
-        level: "Common Challenging Words",
+        word: "hatch",
+        difficulty: 5,
+        level: "Intermediate Level",
         clues: [
-          "A strong, regular repeated pattern of movement or sound",
-          "Important in music and dance",
-          "Can refer to natural cycles or patterns",
+          "To emerge from an egg",
+          "A door or opening",
+          "To create (an idea or plan)",
         ],
       },
     ],
@@ -350,13 +350,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "naive",
+        word: "pound",
         difficulty: 5,
         level: "Intermediate Level",
         clues: [
-          "Showing a lack of experience or judgment",
-          "Often associated with innocence or simplicity",
-          "Can be both positive and negative",
+          "To strike heavily and repeatedly",
+          "A unit of weight",
+          "An enclosure for stray animals",
         ],
       },
     ],
@@ -365,13 +365,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "quota",
+        word: "bound",
         difficulty: 5,
         level: "Intermediate Level",
         clues: [
-          "A fixed minimum or maximum number or amount",
-          "Often used in business or politics",
-          "Can refer to a sales target or immigration limit",
+          "To jump or leap",
+          "A limit or boundary",
+          "Destined or very likely to happen",
         ],
       },
     ],
@@ -380,13 +380,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "ethos",
-        difficulty: 6,
-        level: "Common Challenging Words",
+        word: "graze",
+        difficulty: 5,
+        level: "Intermediate Level",
         clues: [
-          "The characteristic spirit of a culture or community",
-          "Often refers to guiding beliefs or ideals",
-          "Important concept in rhetoric and philosophy",
+          "To feed on growing grass",
+          "To scrape or scratch slightly",
+          "To touch lightly in passing",
         ],
       },
     ],
@@ -395,13 +395,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "alien",
-        difficulty: 4,
-        level: "Common Daily Words",
+        word: "yield",
+        difficulty: 5,
+        level: "Intermediate Level",
         clues: [
-          "Belonging to a foreign country",
-          "Can refer to extraterrestrial beings",
-          "Also means unfamiliar or distasteful",
+          "To give way to or surrender",
+          "The amount of a crop or product produced",
+          "To produce or generate (a result)",
         ],
       },
     ],
@@ -410,13 +410,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "judge",
-        difficulty: 4,
-        level: "Common Daily Words",
+        word: "rally",
+        difficulty: 5,
+        level: "Intermediate Level",
         clues: [
-          "To form an opinion or conclusion about",
-          "A person who decides cases in court",
-          "Can also mean to compete as a judge",
+          "To recover strength",
+          "A mass meeting to support a cause",
+          "A long-distance car race",
         ],
       },
     ],
@@ -425,13 +425,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "niche",
-        difficulty: 5,
-        level: "Intermediate Level",
+        word: "forge",
+        difficulty: 6,
+        level: "Advanced Words",
         clues: [
-          "A specialized segment of the market",
-          "A comfortable or suitable position in life",
-          "In ecology, the role of a species in its environment",
+          "To form by heating and hammering",
+          "To move forward steadily",
+          "To produce a fraudulent copy of something",
         ],
       },
     ],
@@ -440,13 +440,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "cause",
-        difficulty: 4,
-        level: "Common Daily Words",
+        word: "steep",
+        difficulty: 5,
+        level: "Intermediate Level",
         clues: [
-          "A person or thing that gives rise to an action or condition",
-          "A principle or movement worthy of support",
-          "Can be used as a verb meaning 'to make happen'",
+          "Having a sharp slope or incline",
+          "To soak in liquid to extract flavor",
+          "Excessive or extreme in degree",
         ],
       },
     ],
@@ -455,13 +455,13 @@ const quizzes = {
     category: "Daily Vocabulary Challenge",
     words: [
       {
-        word: "phase",
-        difficulty: 4,
-        level: "Common Daily Words",
+        word: "bluff",
+        difficulty: 5,
+        level: "Intermediate Level",
         clues: [
-          "A distinct stage in a process of change or development",
-          "In science, it can refer to states of matter",
-          "Also used in astronomy for appearances of the moon",
+          "A steep cliff or bank",
+          "To deceive by a false show of strength",
+          "Good-naturedly direct in speech or behavior",
         ],
       },
     ],
