@@ -14,9 +14,16 @@
       </header>
 
       <div id="game-area">
-        <div id="clues-section">
-          <h2>CLUES</h2>
-          <div id="clues-container"></div>
+        <div id="hint-section">
+          <h2>Clues</h2>
+          <div id="hint-container">
+            <div class="hint revealed" id="hint1"></div>
+            <div class="hint" id="hint2"></div>
+            <div class="hint" id="hint3"></div>
+          </div>
+          <button id="reveal-hint-btn" class="hint-button">
+            Reveal Next Hint
+          </button>
         </div>
         <div id="mini-history"></div>
         <div id="current-guess"></div>
@@ -24,8 +31,10 @@
       <div id="progress"></div>
       <div id="keyboard"></div>
     </div>
-
+    <script type="module" src="utils.js"></script>
+    <script type="module" src="game-logic.js"></script>
+    <script type="module" src="ui.js"></script>
+    <script type="module" src="script.js"></script>
     <script src="quizzes.js"></script>
-    <script src="script.js"></script>
   </body>
 </html>
