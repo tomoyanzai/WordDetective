@@ -19,15 +19,28 @@ function getCurrentDate() {
   return now.toISOString().split("T")[0]; // Returns "YYYY-MM-DD"
 }
 
-function loadWord() {
+function loadWord(wordLength = 5) {
   const currentDate = getCurrentDate();
   const quiz = quizzes[currentDate];
   if (quiz) {
-    currentWord = quiz.words[0].word.toUpperCase();
+    const eligibleWords = quiz.words.filter(
+      (wordObj) => wordObj.word.length === wordLength
+    );
+    if (eligibleWords.length > 0) {
+      const randomIndex = Math.floor(Math.random() * eligibleWords.length);
+      currentWord = eligibleWords[randomIndex].word.toUpperCase();
+      return eligibleWords[randomIndex];
+    } else {
+      console.error(
+        `No words with length ${wordLength} found for today's date`
+      );
+      // Fallback to a default word or show an error message
+    }
   } else {
     console.error("No quiz found for today's date");
     // Fallback to a default quiz or show an error message
   }
+  return null;
 }
 
 function displayClues() {

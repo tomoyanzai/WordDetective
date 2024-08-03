@@ -1,6 +1,5 @@
 const quizzes = {
   "2024-07-16": {
-    date: "2024-07-16",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -16,7 +15,6 @@ const quizzes = {
     ],
   },
   "2024-07-17": {
-    date: "2024-07-17",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -32,7 +30,6 @@ const quizzes = {
     ],
   },
   "2024-07-18": {
-    date: "2024-07-18",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -48,7 +45,6 @@ const quizzes = {
     ],
   },
   "2024-07-19": {
-    date: "2024-07-19",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -64,7 +60,6 @@ const quizzes = {
     ],
   },
   "2024-07-20": {
-    date: "2024-07-20",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -80,7 +75,6 @@ const quizzes = {
     ],
   },
   "2024-07-21": {
-    date: "2024-07-21",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -96,7 +90,6 @@ const quizzes = {
     ],
   },
   "2024-07-22": {
-    date: "2024-07-22",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -112,7 +105,6 @@ const quizzes = {
     ],
   },
   "2024-07-23": {
-    date: "2024-07-23",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -128,7 +120,6 @@ const quizzes = {
     ],
   },
   "2024-07-24": {
-    date: "2024-07-24",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -144,7 +135,6 @@ const quizzes = {
     ],
   },
   "2024-07-25": {
-    date: "2024-07-25",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -160,7 +150,6 @@ const quizzes = {
     ],
   },
   "2024-07-26": {
-    date: "2024-07-26",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -176,7 +165,6 @@ const quizzes = {
     ],
   },
   "2024-07-27": {
-    date: "2024-07-27",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -192,7 +180,6 @@ const quizzes = {
     ],
   },
   "2024-07-28": {
-    date: "2024-07-28",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -208,7 +195,6 @@ const quizzes = {
     ],
   },
   "2024-07-29": {
-    date: "2024-07-29",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -224,7 +210,6 @@ const quizzes = {
     ],
   },
   "2024-07-30": {
-    date: "2024-07-30",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -240,7 +225,6 @@ const quizzes = {
     ],
   },
   "2024-07-31": {
-    date: "2024-07-31",
     category: "Daily Vocabulary Challenge",
     words: [
       {
@@ -255,4 +239,234 @@ const quizzes = {
       },
     ],
   },
+
+  // August data (new entries)
+  "2024-08-01": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "climb",
+        difficulty: 4,
+        level: "Common Daily Words",
+        clues: [
+          "To move upwards, typically using hands and feet",
+          "Often associated with mountains or ladders",
+          "Can be used metaphorically for advancement",
+        ],
+      },
+    ],
+  },
+  "2024-08-02": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "ghost",
+        difficulty: 4,
+        level: "Common Daily Words",
+        clues: [
+          "A supposed spirit of a dead person",
+          "Often featured in horror stories",
+          "Can mean to suddenly cut off all communication",
+        ],
+      },
+    ],
+  },
+  "2024-08-03": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "piano",
+        difficulty: 4,
+        level: "Common Daily Words",
+        clues: [
+          "A musical instrument with keys",
+          "Can be upright or grand",
+          "Name comes from Italian for 'soft'",
+        ],
+      },
+    ],
+  },
+  "2024-08-04": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "yacht",
+        difficulty: 5,
+        level: "Intermediate Level",
+        clues: [
+          "A medium-sized sailboat or motorboat",
+          "Often associated with luxury and wealth",
+          "Used for racing or pleasure cruising",
+        ],
+      },
+    ],
+  },
+  "2024-08-05": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "knead",
+        difficulty: 5,
+        level: "Intermediate Level",
+        clues: [
+          "To work and press into a mass",
+          "Often done with dough in baking",
+          "Can also refer to massaging muscles",
+        ],
+      },
+    ],
+  },
+  "2024-08-06": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "queue",
+        difficulty: 5,
+        level: "Intermediate Level",
+        clues: [
+          "A line of people waiting for something",
+          "Can also be used as a verb",
+          "In computing, it's a data structure",
+        ],
+      },
+    ],
+  },
+  "2024-08-07": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "rhythm",
+        difficulty: 6,
+        level: "Common Challenging Words",
+        clues: [
+          "A strong, regular repeated pattern of movement or sound",
+          "Important in music and dance",
+          "Can refer to natural cycles or patterns",
+        ],
+      },
+    ],
+  },
+  "2024-08-08": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "naive",
+        difficulty: 5,
+        level: "Intermediate Level",
+        clues: [
+          "Showing a lack of experience or judgment",
+          "Often associated with innocence or simplicity",
+          "Can be both positive and negative",
+        ],
+      },
+    ],
+  },
+  "2024-08-09": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "quota",
+        difficulty: 5,
+        level: "Intermediate Level",
+        clues: [
+          "A fixed minimum or maximum number or amount",
+          "Often used in business or politics",
+          "Can refer to a sales target or immigration limit",
+        ],
+      },
+    ],
+  },
+  "2024-08-10": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "ethos",
+        difficulty: 6,
+        level: "Common Challenging Words",
+        clues: [
+          "The characteristic spirit of a culture or community",
+          "Often refers to guiding beliefs or ideals",
+          "Important concept in rhetoric and philosophy",
+        ],
+      },
+    ],
+  },
+  "2024-08-11": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "alien",
+        difficulty: 4,
+        level: "Common Daily Words",
+        clues: [
+          "Belonging to a foreign country",
+          "Can refer to extraterrestrial beings",
+          "Also means unfamiliar or distasteful",
+        ],
+      },
+    ],
+  },
+  "2024-08-12": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "judge",
+        difficulty: 4,
+        level: "Common Daily Words",
+        clues: [
+          "To form an opinion or conclusion about",
+          "A person who decides cases in court",
+          "Can also mean to compete as a judge",
+        ],
+      },
+    ],
+  },
+  "2024-08-13": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "niche",
+        difficulty: 5,
+        level: "Intermediate Level",
+        clues: [
+          "A specialized segment of the market",
+          "A comfortable or suitable position in life",
+          "In ecology, the role of a species in its environment",
+        ],
+      },
+    ],
+  },
+  "2024-08-14": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "cause",
+        difficulty: 4,
+        level: "Common Daily Words",
+        clues: [
+          "A person or thing that gives rise to an action or condition",
+          "A principle or movement worthy of support",
+          "Can be used as a verb meaning 'to make happen'",
+        ],
+      },
+    ],
+  },
+  "2024-08-15": {
+    category: "Daily Vocabulary Challenge",
+    words: [
+      {
+        word: "phase",
+        difficulty: 4,
+        level: "Common Daily Words",
+        clues: [
+          "A distinct stage in a process of change or development",
+          "In science, it can refer to states of matter",
+          "Also used in astronomy for appearances of the moon",
+        ],
+      },
+    ],
+  },
+  // ... Add more entries for the rest of August following the same pattern
 };
+
+// End of quizzes.js
