@@ -24,6 +24,7 @@
     <div id="game-container">
       <header>
         <h1 id="game-logo">WORD DETECTIVE</h1>
+        <button id="show-how-to-play">How to Play</button>
         <button id="theme-toggle">🌓</button>
       </header>
 
@@ -44,11 +45,54 @@
       </div>
       <div id="progress"></div>
       <div id="keyboard"></div>
+      <button id="show-feedback">Give Feedback</button>
     </div>
     <script type="module" src="utils.js"></script>
     <script type="module" src="game-logic.js"></script>
     <script type="module" src="ui.js"></script>
     <script type="module" src="script.js"></script>
     <script src="quizzes.js"></script>
+
+    <!-- Dialog for How to Play -->
+    <div id="how-to-play-dialog" class="dialog">
+      <div class="dialog-content">
+        <h2>How to Play Word Detective</h2>
+        <p>Welcome to Word Detective! Here's how to play:</p>
+        <ol>
+          <li>Guess the secret 5-letter word in 5 tries.</li>
+          <li>Each guess must be a valid 5-letter word.</li>
+          <li>
+            After each guess, the color of the tiles will change to show how
+            close your guess was to the word.
+          </li>
+        </ol>
+        <p><strong>Color Meanings:</strong></p>
+        <ul>
+          <li>
+            <span class="tile correct"></span> Green: Letter is correct and in
+            the right spot.
+          </li>
+          <li>
+            <span class="tile present"></span> Yellow: Letter is in the word but
+            in the wrong spot.
+          </li>
+          <li>
+            <span class="tile absent"></span> Gray: Letter is not in the word.
+          </li>
+        </ul>
+        <p>
+          Use the clues provided to help you guess the word. You can reveal up
+          to 3 clues during the game.
+        </p>
+        <h3>Game Concept</h3>
+        <p>
+          In Word Detective, you'll be guessing a five-letter word that has
+          multiple meanings or uses. This twist makes the game both challenging
+          and educational, especially for ESL learners.
+        </p>
+        <p><strong>Good luck and have fun!</strong></p>
+        <button id="close-dialog">Got it!</button>
+      </div>
+    </div>
   </body>
 </html>

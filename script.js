@@ -30,6 +30,26 @@ function initializeGame() {
     document
       .getElementById("theme-toggle")
       .addEventListener("click", toggleTheme);
+
+    // Add this line to set up the 'How to Play' button
+    document
+      .getElementById("show-how-to-play")
+      .addEventListener("click", showHowToPlay);
+
+    document
+      .getElementById("show-feedback")
+      .addEventListener("click", function () {
+        window.open(
+          "https://docs.google.com/forms/d/e/1FAIpQLSfenrOG0o8XF8wsE_rd18YKVg_W-DAXvI7uMoS1omlta4zBwA/viewform?usp=sf_link",
+          "_blank"
+        );
+      });
+
+    // Optionally, show the dialog for first-time players
+    if (!localStorage.getItem("hasPlayedBefore")) {
+      showHowToPlay();
+      localStorage.setItem("hasPlayedBefore", "true");
+    }
   } else {
     console.error("Failed to load word data");
     // Handle error (e.g., display a message to the user)
@@ -147,3 +167,36 @@ function endGame(isWin) {
 
 document.addEventListener("DOMContentLoaded", initializeGame);
 document.addEventListener("keydown", handleKeyPress);
+
+// How to Play
+function showHowToPlay() {
+  const dialog = document.getElementById("how-to-play-dialog");
+  dialog.classList.add("show");
+}
+
+function closeHowToPlay(event) {
+  // Prevent the event from bubbling up to the dialog
+  event.stopPropagation();
+  const dialog = document.getElementById("how-to-play-dialog");
+  dialog.classList.remove("show");
+}
+
+// Make sure these event listeners are added in your initializeGame function or when the DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+  const showButton = document.getElementById("show-how-to-play");
+  const closeButton = document.getElementById("close-dialog");
+  const dialog = document.getElementById("how-to-play-dialog");
+
+  if (showButton) showButton.addEventListener("click", showHowToPlay);
+  if (closeButton) closeButton.addEventListener("click", closeHowToPlay);
+
+  // Prevent clicks inside the dialog from closing it
+  dialog
+    .querySelector(".dialog-content")
+    .addEventListener("click", function (event) {
+      event.stopPropagation();
+    });
+
+  // Close the dialog when clicking outside of it
+  dialog.addEventListener("click", closeHowToPlay);
+});

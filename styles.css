@@ -71,7 +71,7 @@ header {
 }
 
 #game-logo {
-  font-size: 24px;
+  font-size: 20px;
   margin: 0;
 }
 
@@ -297,4 +297,130 @@ header {
 /* Remove unnecessary dark mode specific styles */
 [data-theme="dark"] #hint-section {
   box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.dialog {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.dialog.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-content {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  padding: 15px;
+  border: 1px solid var(--tile-border-empty);
+  border-radius: 5px;
+  width: 80%;
+  max-width: 400px;
+  max-height: 70vh;
+  overflow-y: auto;
+  position: relative;
+  font-size: 0.9em;
+}
+
+.dialog h2 {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+.dialog h3 {
+  font-size: 1.1em;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.dialog p,
+.dialog li {
+  margin-bottom: 8px;
+}
+
+.dialog .tile {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.dialog .correct {
+  background-color: var(--color-correct);
+}
+
+.dialog .present {
+  background-color: var(--color-present);
+}
+
+.dialog .absent {
+  background-color: var(--color-absent);
+}
+
+#close-dialog {
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: var(--color-correct);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  z-index: 1001; /* Ensure the button is above other elements */
+}
+
+#close-dialog:hover {
+  background-color: var(--hint-button-bg);
+}
+
+@media (max-width: 480px) {
+  .dialog-content {
+    width: 90%;
+    max-height: 80vh;
+    font-size: 0.85em;
+  }
+
+  #close-dialog {
+    padding: 15px;
+    font-size: 1em;
+  }
+}
+#show-feedback {
+  background-color: var(--hint-button-disabled-bg);
+  color: var(--hint-button-text);
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#show-feedback:hover {
+  background-color: var(--hint-button-bg);
+}
+#show-how-to-play {
+  background-color: var(--hint-button-disabled-bg);
+  color: var(--hint-button-text);
+  border: none;
+  padding: 7px 10px;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#show-how-to-play:hover {
+  background-color: var(--hint-button-bg);
 }
